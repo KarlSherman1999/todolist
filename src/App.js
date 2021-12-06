@@ -9,14 +9,21 @@ const App = ()=>{
     setArray(old =>[...old,toDoList]);
     setList("")
   }
+  const deleteHandler = (index) =>{
+    let nums = [...myArray];
+    nums.splice(index,1);
+    setArray(nums);
+  }
   return (
     <div>
       <h1>To do list</h1>
-      <input id ="input" type="text" value={toDoList} onChange={handler} />
+      <input id ="input" type="text" value={toDoList} onChange={handler}/>
       <button type="submit" onClick={addList}>Add to list</button>
-      {/* <h2>{toDoList}</h2> */}
-      <h2 onClick={addList}>{myArray.map((num,index) =>{
-        return <h2>{num}</h2>
+      <h2 onChange={addList}>{myArray.map((num,index) =>{
+        return <div key={index} value ="todoItem">
+          <h2>{num}</h2>
+          <button onClick = {() => deleteHandler(index)}>✔️</button>
+          </div>
       })}</h2>
     </div>
   )
